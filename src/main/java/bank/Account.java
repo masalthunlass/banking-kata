@@ -1,6 +1,7 @@
 package bank;
 
 import java.math.BigInteger;
+import java.time.LocalDate;
 
 public class Account {
 
@@ -20,9 +21,9 @@ public class Account {
         return balance;
     }
 
-    public void depose(final BigInteger amount) {
+    public void depose(final BigInteger amount, LocalDate operationDate) {
          this.balance = this.balance.add(amount);
-         this.statement = new AccountStatement(amount, this.balance);
+         this.statement = new AccountStatement(amount, this.balance, operationDate);
     }
 
     public void withdraw(final BigInteger amount) {

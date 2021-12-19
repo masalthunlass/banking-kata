@@ -5,6 +5,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigInteger;
+import java.time.LocalDate;
 
 public class AccountTest {
 
@@ -20,7 +21,7 @@ public class AccountTest {
     void given_a_deposit_of_100_then_the_balance_is_100() {
         final Account account = new Account();
         final BigInteger amount = new BigInteger("100");
-        account.depose(amount);
+        account.depose(amount, LocalDate.of(2020, 1, 1));
         Assertions.assertThat(account.getBalance()).isEqualTo(new BigInteger("100"));
     }
 
@@ -28,7 +29,7 @@ public class AccountTest {
     void given_a_deposit_of_200_and_balance_is_100_then_the_balance_is_300() {
         final Account account = new Account(new BigInteger("100"));
         final BigInteger amount = new BigInteger("200");
-        account.depose(amount);
+        account.depose(amount, LocalDate.of(2020, 1, 1));
         Assertions.assertThat(account.getBalance()).isEqualTo(new BigInteger("300"));
     }
 
@@ -51,7 +52,7 @@ public class AccountTest {
         final BigInteger balance = new BigInteger("100");
         final Account account = new Account(balance);
         final BigInteger amount = new BigInteger("200");
-        account.depose(amount);
+        account.depose(amount,null);
         Assertions.assertThat(account.getAccountStatement().getAmount()).isEqualTo(amount);
     }
 
@@ -61,11 +62,23 @@ public class AccountTest {
         final Account account = new Account(balance);
         final BigInteger amount = new BigInteger("200");
 
-        account.depose(amount);
+        account.depose(amount, null);
 
         final BigInteger balanceAfterOperation = new BigInteger("300");
         Assertions.assertThat(account.getAccountStatement().getBalance()).isEqualTo(balanceAfterOperation);
     }
+
+    @Test
+    void given_an_account_when_depose_amount_at_a_date_then_keep_date() {
+        final BigInteger balance = new BigInteger("100");
+        final Account account = new Account(balance);
+        final BigInteger amount = new BigInteger("200");
+
+        account.depose(amount, LocalDate.of(2020, 1,1));
+
+        Assertions.assertThat(account.getAccountStatement().getOperationDate()).isEqualTo( LocalDate.of(2020, 1,1));
+    }
+
 
 
 }
