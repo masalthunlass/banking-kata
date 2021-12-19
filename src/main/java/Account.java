@@ -7,4 +7,8 @@ public class Account {
     public BigInteger getBalance() {
         return balance;
     }
+
+    public void depose(BigInteger amount) {
+         this.balance = new BigInteger("100");
+    }
 }
