@@ -8,7 +8,9 @@ public class Account {
 
     }
     public Account(final BigInteger balance) {
+        if (balance == null) return;
         this.balance = balance;
+
     }
 
     public BigInteger getBalance() {

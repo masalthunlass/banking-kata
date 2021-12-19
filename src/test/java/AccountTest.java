@@ -38,6 +38,11 @@ public class AccountTest {
         assertThat(account.getBalance()).isEqualTo(new BigInteger("250"));
     }
 
+    @Test
+    void given_an_account_then_the_balance_cannot_be_null() {
+        final Account account = new Account(null);
+        assertThat(account.getBalance()).isEqualTo(0);
+    }
 
 
 }
