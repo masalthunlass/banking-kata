@@ -7,7 +7,7 @@ public class Account {
     public Account() {
 
     }
-    public Account(BigInteger balance) {
+    public Account(final BigInteger balance) {
         this.balance = balance;
     }
 
@@ -15,8 +15,11 @@ public class Account {
         return balance;
     }
 
-    public void depose(BigInteger amount) {
+    public void depose(final BigInteger amount) {
          this.balance = this.balance.add(amount);
     }
 
+    public void withdraw(final BigInteger amount) {
+        this.balance = this.balance.subtract(amount);
+    }
 }
