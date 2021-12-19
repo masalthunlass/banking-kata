@@ -55,6 +55,17 @@ public class AccountTest {
         Assertions.assertThat(account.getAccountStatement().getAmount()).isEqualTo(amount);
     }
 
+    @Test
+    void given_an_account_when_depose_amount_then_keep_balance() {
+        final BigInteger balance = new BigInteger("100");
+        final Account account = new Account(balance);
+        final BigInteger amount = new BigInteger("200");
+
+        account.depose(amount);
+
+        final BigInteger balanceAfterOperation = new BigInteger("300");
+        Assertions.assertThat(account.getAccountStatement().getBalance()).isEqualTo(balanceAfterOperation);
+    }
 
 
 }

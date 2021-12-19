@@ -22,7 +22,7 @@ public class Account {
 
     public void depose(final BigInteger amount) {
          this.balance = this.balance.add(amount);
-         this.statement = new AccountStatement(amount);
+         this.statement = new AccountStatement(amount, this.balance);
     }
 
     public void withdraw(final BigInteger amount) {
