@@ -1,4 +1,4 @@
-##Account Kata
+##bank.Account Kata
 
 · two operations : deposit and withdraw
 
