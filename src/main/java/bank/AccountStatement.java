@@ -2,6 +2,7 @@ package bank;
 
 import java.math.BigInteger;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -25,7 +26,7 @@ public class AccountStatement {
     }
 
     public String print() {
-        return "01/01/2020";
+        return  this.operations.get(0).toString();
     }
 
     public static class AccountOperation {
@@ -63,7 +64,11 @@ public class AccountStatement {
          public int hashCode() {
              return Objects.hash(amount, balance, operationDate);
          }
-     }
+
+        @Override
+        public String toString() {
+            return this.operationDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) ;       }
+    }
 
     public static class DepositOperation extends  AccountOperation {
         public DepositOperation(BigInteger amount, BigInteger balance, LocalDate operationDate) {
