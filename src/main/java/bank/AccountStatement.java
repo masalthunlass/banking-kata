@@ -24,7 +24,11 @@ public class AccountStatement {
         operations.add(new WithdrawOperation(amount,balance, operationDate));
     }
 
-     public static class AccountOperation {
+    public String print() {
+        return "01/01/2020";
+    }
+
+    public static class AccountOperation {
          private final BigInteger amount;
          private final BigInteger balance;
          private final LocalDate operationDate;
