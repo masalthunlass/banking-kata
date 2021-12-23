@@ -2,19 +2,35 @@ package bank;
 
 import java.math.BigInteger;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
-public record AccountStatement(BigInteger amount, BigInteger balance,
-                               LocalDate operationDate) {
+public class AccountStatement {
 
-    public BigInteger getAmount() {
-        return amount;
+    private List<AccountOperation> operations = new ArrayList<>();
+
+
+    public List<AccountOperation>  getOperations() {
+        return operations;
     }
 
-    public BigInteger getBalance() {
-        return this.balance;
+    public void addOperation(BigInteger amount, BigInteger balance,
+                             LocalDate operationDate) {
+        operations.add(new AccountOperation(amount,balance, operationDate));
     }
 
-    public LocalDate getOperationDate() {
-        return this.operationDate;
+    record AccountOperation(BigInteger amount, BigInteger balance,
+                            LocalDate operationDate) {
+        public BigInteger getAmount() {
+            return amount;
+        }
+
+        public BigInteger getBalance() {
+            return this.balance;
+        }
+
+        public LocalDate getOperationDate() {
+            return this.operationDate;
+        }
     }
 }

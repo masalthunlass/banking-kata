@@ -6,11 +6,12 @@ import java.time.LocalDate;
 public class Account {
 
     private BigInteger balance = BigInteger.ZERO;
-    private AccountStatement statement;
+    private AccountStatement statement = new AccountStatement();
 
     public Account() {
 
     }
+
     public Account(final BigInteger balance) {
         if (balance == null) return;
         this.balance = balance;
@@ -22,8 +23,8 @@ public class Account {
     }
 
     public void depose(final BigInteger amount, LocalDate operationDate) {
-         this.balance = this.balance.add(amount);
-         this.statement = new AccountStatement(amount, this.balance, operationDate);
+        this.balance = this.balance.add(amount);
+        statement.addOperation(amount, this.balance, operationDate);
     }
 
     public void withdraw(final BigInteger amount) {

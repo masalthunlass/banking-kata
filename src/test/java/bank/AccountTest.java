@@ -10,7 +10,6 @@ import java.time.LocalDate;
 public class AccountTest {
 
 
-
     @Test
     void given_a_new_account_then_the_balance_is_0() {
         final Account account = new Account();
@@ -52,8 +51,8 @@ public class AccountTest {
         final BigInteger balance = new BigInteger("100");
         final Account account = new Account(balance);
         final BigInteger amount = new BigInteger("200");
-        account.depose(amount,null);
-        Assertions.assertThat(account.getAccountStatement().getAmount()).isEqualTo(amount);
+        account.depose(amount, null);
+        Assertions.assertThat(account.getAccountStatement().getOperations().get(0).getAmount()).isEqualTo(amount);
     }
 
     @Test
@@ -65,7 +64,7 @@ public class AccountTest {
         account.depose(amount, null);
 
         final BigInteger balanceAfterOperation = new BigInteger("300");
-        Assertions.assertThat(account.getAccountStatement().getBalance()).isEqualTo(balanceAfterOperation);
+        Assertions.assertThat(account.getAccountStatement().getOperations().get(0).getBalance()).isEqualTo(balanceAfterOperation);
     }
 
     @Test
@@ -74,10 +73,30 @@ public class AccountTest {
         final Account account = new Account(balance);
         final BigInteger amount = new BigInteger("200");
 
-        account.depose(amount, LocalDate.of(2020, 1,1));
+        account.depose(amount, LocalDate.of(2020, 1, 1));
 
-        Assertions.assertThat(account.getAccountStatement().getOperationDate()).isEqualTo( LocalDate.of(2020, 1,1));
+        Assertions.assertThat(account.getAccountStatement().getOperations().get(0).getOperationDate())
+                .isEqualTo(LocalDate.of(2020, 1, 1));
     }
+
+    @Test
+    void given_an_account_when_depose_amount_twice_then_keep_two_operations_history() {
+
+        final Account account = new Account(BigInteger.ZERO);
+
+        account.depose(new BigInteger("200"), LocalDate.of(2020, 1, 1));
+        account.depose(new BigInteger("20"), LocalDate.of(2020, 2, 1));
+
+        Assertions.assertThat(account.getAccountStatement().getOperations()).hasSize(2);
+        Assertions.assertThat(account.getAccountStatement().getOperations()).containsExactly(
+                new AccountStatement.AccountOperation(
+                        new BigInteger("200"),new BigInteger("200"),LocalDate.of(2020, 1, 1)
+                ), new AccountStatement.AccountOperation(
+                        new BigInteger("20"),new BigInteger("220"),LocalDate.of(2020, 2, 1)
+                ));
+    }
+
+
 
 
 
