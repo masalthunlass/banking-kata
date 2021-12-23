@@ -97,6 +97,14 @@ public class AccountTest {
     }
 
 
+    @Test
+    void given_an_account_when_withdraw_amount_then_keep_amount() {
+        final BigInteger balance = new BigInteger("100");
+        final Account account = new Account(balance);
+        final BigInteger amount = new BigInteger("200");
+        account.withdraw(amount);
+        Assertions.assertThat(account.getAccountStatement().getOperations().get(0).getAmount()).isEqualTo(amount);
+    }
 
 
 
