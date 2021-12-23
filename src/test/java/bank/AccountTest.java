@@ -89,9 +89,9 @@ public class AccountTest {
 
         Assertions.assertThat(account.getAccountStatement().getOperations()).hasSize(2);
         Assertions.assertThat(account.getAccountStatement().getOperations()).containsExactly(
-                new AccountStatement.AccountOperation(
+                new AccountStatement.DepositOperation(
                         new BigInteger("200"),new BigInteger("200"),LocalDate.of(2020, 1, 1)
-                ), new AccountStatement.AccountOperation(
+                ), new AccountStatement.DepositOperation(
                         new BigInteger("20"),new BigInteger("220"),LocalDate.of(2020, 2, 1)
                 ));
     }
@@ -127,6 +127,20 @@ public class AccountTest {
 
 
 
+    @Test
+    void given_an_account_when_depose_and_withdraw_amount_keep_the_type_of_operation() {
+
+        final Account account = new Account(BigInteger.ZERO);
+
+        account.depose(new BigInteger("200"), LocalDate.of(2020, 1, 1));
+        account.withdraw(new BigInteger("200"), LocalDate.of(2020,1,3));
+
+        Assertions.assertThat(account.getAccountStatement().getOperations()).containsExactly(
+                new AccountStatement.DepositOperation(  new BigInteger("200"),new BigInteger("200"),LocalDate.of(2020, 1, 1)
+                ), new AccountStatement.WithdrawOperation(
+                        new BigInteger("200"),new BigInteger("0"),LocalDate.of(2020, 1, 3)
+                ));
+    }
 
 
 }

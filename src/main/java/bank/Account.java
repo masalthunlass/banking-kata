@@ -24,12 +24,12 @@ public class Account {
 
     public void depose(final BigInteger amount, LocalDate operationDate) {
         this.balance = this.balance.add(amount);
-        statement.addOperation(amount, this.balance, operationDate);
+        statement.addDepositOperation(amount, this.balance, operationDate);
     }
 
     public void withdraw(final BigInteger amount, LocalDate operationDate) {
         this.balance = this.balance.subtract(amount);
-        statement.addOperation(amount,this.balance, operationDate);
+        statement.addWithdrawOperation(amount,this.balance, operationDate);
     }
 
     public AccountStatement getAccountStatement() {
