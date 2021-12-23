@@ -27,9 +27,9 @@ public class Account {
         statement.addOperation(amount, this.balance, operationDate);
     }
 
-    public void withdraw(final BigInteger amount) {
+    public void withdraw(final BigInteger amount, LocalDate operationDate) {
         this.balance = this.balance.subtract(amount);
-        statement.addOperation(amount,this.balance, null);
+        statement.addOperation(amount,this.balance, operationDate);
     }
 
     public AccountStatement getAccountStatement() {

@@ -36,7 +36,7 @@ public class AccountTest {
     void given_a_withdraw_of_50_and_balance_is_350_then_the_balance_is_250() {
         final Account account = new Account(new BigInteger("300"));
         final BigInteger amount = new BigInteger("50");
-        account.withdraw(amount);
+        account.withdraw(amount, LocalDate.of(2020, 1, 3));
         Assertions.assertThat(account.getBalance()).isEqualTo(new BigInteger("250"));
     }
 
@@ -102,7 +102,7 @@ public class AccountTest {
         final BigInteger balance = new BigInteger("100");
         final Account account = new Account(balance);
         final BigInteger amount = new BigInteger("200");
-        account.withdraw(amount);
+        account.withdraw(amount, LocalDate.of(2020, 1, 3));
         Assertions.assertThat(account.getAccountStatement().getOperations().get(0).getAmount()).isEqualTo(amount);
     }
 
@@ -112,9 +112,19 @@ public class AccountTest {
         final BigInteger balance = new BigInteger("300");
         final Account account = new Account(balance);
         final BigInteger amount = new BigInteger("200");
-        account.withdraw(amount);
+        account.withdraw(amount, LocalDate.of(2020, 1, 3));
         Assertions.assertThat(account.getAccountStatement().getOperations().get(0).getBalance()).isEqualTo("100");
     }
+
+    @Test
+    void given_an_account_when_withdraw_amount_at_a_date_then_keep_the_date() {
+        final BigInteger balance = new BigInteger("300");
+        final Account account = new Account(balance);
+        final BigInteger amount = new BigInteger("200");
+        account.withdraw(amount, LocalDate.of(2020,1,3));
+        Assertions.assertThat(account.getAccountStatement().getOperations().get(0).getOperationDate()).isEqualTo( LocalDate.of(2020,1,3));
+    }
+
 
 
 
