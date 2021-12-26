@@ -67,7 +67,7 @@ public class AccountStatement {
 
         @Override
         public String toString() {
-            return this.operationDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) ;       }
+            return this.operationDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + '|' + this.getAmount() ;       }
     }
 
     public static class DepositOperation extends  AccountOperation {
