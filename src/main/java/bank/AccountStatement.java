@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class AccountStatement {
 
@@ -27,7 +28,10 @@ public class AccountStatement {
     }
 
     public String print() {
-        return String.join(System.lineSeparator(),"date|amount|balance",this.operations.get(0).toString());
+        return String.join(System.lineSeparator(),"date|amount|balance",
+                this.operations.stream().map(AccountOperation::toString)
+                        .collect(Collectors.joining(System.lineSeparator()))
+        );
     }
 
     public abstract static class AccountOperation {

@@ -102,4 +102,14 @@ class AccountStatementTest {
     }
 
 
+    @Test
+    void should_print_all_operations_when_printing_statement() {
+        this.accountStatement.addWithdrawOperation(new BigInteger("50"), new BigInteger("250"), LocalDate.of(2020, 1, 1));
+        this.accountStatement.addDepositOperation(new BigInteger("100"), new BigInteger("100"), LocalDate.of(2020, 1, 1));
+
+        assertThat(this.accountStatement.print()).isEqualTo(
+                "date|amount|balance"+ System.lineSeparator()+ "01/01/2020|-50|250" +System.lineSeparator()+ "01/01/2020|100|100"
+        );
+    }
+
 }
