@@ -51,7 +51,7 @@ public class AccountTest {
         final BigInteger balance = new BigInteger("100");
         final Account account = new Account(balance);
         final BigInteger amount = new BigInteger("200");
-        account.depose(amount, null);
+        account.depose(amount,  LocalDate.of(2020,1,1));
         Assertions.assertThat(account.getAccountStatement().getOperations().get(0).getAmount()).isEqualTo(amount);
     }
 
@@ -61,7 +61,7 @@ public class AccountTest {
         final Account account = new Account(balance);
         final BigInteger amount = new BigInteger("200");
 
-        account.depose(amount, null);
+        account.depose(amount, LocalDate.of(2020,1,1));
 
         final BigInteger balanceAfterOperation = new BigInteger("300");
         Assertions.assertThat(account.getAccountStatement().getOperations().get(0).getBalance()).isEqualTo(balanceAfterOperation);

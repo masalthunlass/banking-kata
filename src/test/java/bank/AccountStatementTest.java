@@ -62,7 +62,6 @@ class AccountStatementTest {
     void should_not_create_a_deposit_operation_with_null_amount() {
         assertThrows(IllegalArgumentException.class, () -> {
             this.accountStatement.addDepositOperation(null, new BigInteger("250"), LocalDate.of(2020, 1, 3));
-
         });
     }
 
@@ -79,9 +78,24 @@ class AccountStatementTest {
     void should_not_create_a_deposit_operation_with_null_balance() {
         assertThrows(IllegalArgumentException.class, () -> {
             this.accountStatement.addDepositOperation(new BigInteger("250"),null, LocalDate.of(2020, 1, 3));
+        });
+    }
+
+    @Test
+    void should_not_create_a_withdraw_operation_with_null_date() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            this.accountStatement.addWithdrawOperation(new BigInteger("250"),new BigInteger("250"), null);
+        });
+    }
+
+    @Test
+    void should_not_create_a_deposit_operation_with_null_date() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            this.accountStatement.addDepositOperation(new BigInteger("250"),new BigInteger("250"), null);
 
         });
     }
+
 
 
 
