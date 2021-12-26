@@ -36,6 +36,7 @@ public class AccountStatement {
         final LocalDate operationDate;
 
         public AccountOperation(BigInteger amount, BigInteger balance, LocalDate operationDate) {
+            if (amount == null) throw new  IllegalArgumentException();
             this.amount = amount;
             this.balance = balance;
             this.operationDate = operationDate;
