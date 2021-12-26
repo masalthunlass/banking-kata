@@ -30,5 +30,12 @@ class AccountStatementTest {
     }
 
 
+    @Test
+    void should_print_amount_second_when_printing_withdraw_operation() {
+        this.accountStatement.addWithdrawOperation(new BigInteger("50"), null, LocalDate.of(2020, 1, 3));
+        assertThat(this.accountStatement.print()).startsWith("03/01/2020|-50");
+    }
+
+
 
 }
