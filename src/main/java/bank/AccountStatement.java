@@ -27,7 +27,7 @@ public class AccountStatement {
     }
 
     public String print() {
-        return this.operations.get(0).toString();
+        return String.join(System.lineSeparator(),"date|amount|balance",this.operations.get(0).toString());
     }
 
     public abstract static class AccountOperation {
