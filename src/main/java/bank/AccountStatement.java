@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -28,8 +29,9 @@ public class AccountStatement {
     }
 
     public String print() {
-        return String.join(System.lineSeparator(),"date|amount|balance",
-                this.operations.stream().map(AccountOperation::toString)
+        return String.join(System.lineSeparator(), "date|amount|balance",
+                this.operations.stream().sorted(Comparator.comparing(AccountOperation::getOperationDate).reversed())
+                        .map(AccountOperation::toString)
                         .collect(Collectors.joining(System.lineSeparator()))
         );
     }
@@ -40,7 +42,7 @@ public class AccountStatement {
         final LocalDate operationDate;
 
         public AccountOperation(BigInteger amount, BigInteger balance, LocalDate operationDate) {
-            if (amount == null || balance == null || operationDate == null) throw new  IllegalArgumentException();
+            if (amount == null || balance == null || operationDate == null) throw new IllegalArgumentException();
             this.amount = amount;
             this.balance = balance;
             this.operationDate = operationDate;
@@ -70,17 +72,18 @@ public class AccountStatement {
         public String toString() {
             return String.join("|",
                     this.operationDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
-                    this.printAmount() ,
-                    ""+this.balance
+                    this.printAmount(),
+                    "" + this.balance
             );
         }
 
-        abstract String printAmount() ;
+        abstract String printAmount();
 
         @Override
         public int hashCode() {
             return Objects.hash(amount, balance, operationDate);
         }
+
 
     }
 
@@ -91,7 +94,7 @@ public class AccountStatement {
         }
 
         String printAmount() {
-            return ""+this.getAmount();
+            return "" + this.getAmount();
         }
 
     }
@@ -101,8 +104,8 @@ public class AccountStatement {
             super(amount, balance, operationDate);
         }
 
-          String printAmount() {
-           return "-"+this.getAmount();
+        String printAmount() {
+            return "-" + this.getAmount();
         }
     }
 }
