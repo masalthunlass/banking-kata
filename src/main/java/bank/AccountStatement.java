@@ -25,7 +25,7 @@ public class AccountStatement {
 
     public void addWithdrawOperation(BigInteger amount, BigInteger balance,
                                      LocalDate operationDate) {
-        operations.add(new WithdrawOperation(amount, balance, operationDate));
+        operations.add(new WithdrawalOperation(amount, balance, operationDate));
     }
 
     public String print() {
@@ -99,8 +99,8 @@ public class AccountStatement {
 
     }
 
-    public static class WithdrawOperation extends AccountOperation {
-        public WithdrawOperation(BigInteger amount, BigInteger balance, LocalDate operationDate) {
+    public static class WithdrawalOperation extends AccountOperation {
+        public WithdrawalOperation(BigInteger amount, BigInteger balance, LocalDate operationDate) {
             super(amount, balance, operationDate);
         }
 

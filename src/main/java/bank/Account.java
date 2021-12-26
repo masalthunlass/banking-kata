@@ -6,11 +6,9 @@ import java.time.LocalDate;
 public class Account {
 
     private BigInteger balance = BigInteger.ZERO;
-    private AccountStatement statement = new AccountStatement();
+    private final AccountStatement statement = new AccountStatement();
 
-    public Account() {
-
-    }
+    public Account() {    }
 
     public Account(final BigInteger balance) {
         if (balance == null) return;
@@ -32,7 +30,11 @@ public class Account {
         statement.addWithdrawOperation(amount,this.balance, operationDate);
     }
 
-    public AccountStatement getAccountStatement() {
+     AccountStatement getAccountStatement() {
         return this.statement;
+    }
+
+    public String printAccountStatement() {
+        return this.getAccountStatement().print();
     }
 }

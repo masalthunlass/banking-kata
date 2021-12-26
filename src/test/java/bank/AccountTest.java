@@ -137,7 +137,7 @@ public class AccountTest {
 
         Assertions.assertThat(account.getAccountStatement().getOperations()).containsExactly(
                 new AccountStatement.DepositOperation(  new BigInteger("200"),new BigInteger("200"),LocalDate.of(2020, 1, 1)
-                ), new AccountStatement.WithdrawOperation(
+                ), new AccountStatement.WithdrawalOperation(
                         new BigInteger("200"),new BigInteger("0"),LocalDate.of(2020, 1, 3)
                 ));
     }
