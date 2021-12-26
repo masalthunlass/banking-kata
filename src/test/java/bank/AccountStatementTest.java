@@ -36,6 +36,19 @@ class AccountStatementTest {
         assertThat(this.accountStatement.print()).startsWith("03/01/2020|-50");
     }
 
+    @Test
+    void should_print_balance_last_when_printing_deposit_operation() {
+        this.accountStatement.addDepositOperation(new BigInteger("100"), new BigInteger("100"), LocalDate.of(2020, 1, 1));
+        assertThat(this.accountStatement.print()).startsWith("01/01/2020|100|100");
+    }
+
+    @Test
+    void should_print_balance_last_when_printing_withdraw_operation() {
+        this.accountStatement.addWithdrawOperation(new BigInteger("50"), new BigInteger("250"), LocalDate.of(2020, 1, 3));
+        assertThat(this.accountStatement.print()).startsWith("03/01/2020|-50|250");
+    }
+
+
 
 
 }

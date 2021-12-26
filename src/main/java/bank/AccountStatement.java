@@ -63,7 +63,11 @@ public class AccountStatement {
 
         @Override
         public String toString() {
-            return this.operationDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + '|' + this.printAmount() ;
+            return String.join("|",
+                    this.operationDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
+                    this.printAmount() ,
+                    ""+this.balance
+            );
         }
 
         abstract String printAmount() ;
